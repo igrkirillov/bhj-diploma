@@ -17,12 +17,13 @@ function callGetOperation(url, data, callback) {
     }
     const xhr = new XMLHttpRequest;
     xhr.open("GET", fullUrl, true);
+    xhr.responseType = "json";
     xhr.addEventListener("readystatechange", () => {
        if (xhr.readyState === xhr.DONE) {
            if (xhr.status >= 200 && xhr.status < 300) {
-               callback(null, xhr.responseText);
+               callback(null, xhr.response);
            } else {
-               callback(xhr.responseText, null);
+               callback(xhr.response, null);
            }
        }
     });
@@ -36,12 +37,13 @@ function callNotGetOperation(url, method, data, callback) {
         formData.append(key, data[key]);
     }
     xhr.open( method, url);
+    xhr.responseType = "json";
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === xhr.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                callback(null, xhr.responseText);
+                callback(null, xhr.response);
             } else {
-                callback(xhr.responseText, null);
+                callback(xhr.response, null);
             }
         }
     });

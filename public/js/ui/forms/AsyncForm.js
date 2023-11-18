@@ -15,6 +15,7 @@ class AsyncForm {
   constructor(element) {
     this.checkNotNullElement(element);
     this.element = element;
+    this.registerEvents();
   }
 
   checkNotNullElement(element) {
