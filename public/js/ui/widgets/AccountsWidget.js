@@ -43,6 +43,7 @@ class AccountsWidget {
     const accountsWidget = this;
     for (const accountElement of accountsElements) {
       accountElement.addEventListener("click", (event) => {
+        event.preventDefault();
         accountsWidget.onSelectAccount(accountElement);
       });
     }
@@ -104,6 +105,7 @@ class AccountsWidget {
       activeAccountElement.classList.remove("active");
     }
     element.classList.add("active");
+    App.showPage("transactions", {account_id: element.dataset.id});
   }
 
   /**
@@ -112,7 +114,7 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(data){
-    return `<li class="account">
+    return `<li class="account" data-id="${data.id}">
         <a href="#">
             <span>${data.name}</span>
             <span>${data.sum}</span>
@@ -127,8 +129,12 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-    const accountElement = document.createElement("li");
-    this.element.appendChild(accountElement);
-    accountElement.outerHTML = this.getAccountHTML(data);
+    const accountsWidget = this;
+    this.element.insertAdjacentHTML("beforeend", this.getAccountHTML(data));
+    const accountElement = this.element.lastElementChild;
+    accountElement.firstElementChild.addEventListener("click", (event) => {
+      event.preventDefault();
+      accountsWidget.onSelectAccount(accountElement);
+    });
   }
 }
