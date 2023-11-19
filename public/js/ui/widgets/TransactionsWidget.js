@@ -12,8 +12,17 @@ class TransactionsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    this.checkNotNullElement(element);
+    this.element = element;
+    this.registerEvents();
   }
+
+  checkNotNullElement(element) {
+    if (element === null) {
+      throw new Error("Элемент равен null");
+    }
+  }
+
   /**
    * Регистрирует обработчики нажатия на
    * кнопки «Новый доход» и «Новый расход».
@@ -21,6 +30,16 @@ class TransactionsWidget {
    * экземпляра окна
    * */
   registerEvents() {
+    const createIncomeElement = document.querySelector(".create-income-button");
+    createIncomeElement.addEventListener("click", event => {
+      const modal = App.getModal("newIncome");
+      modal.open();
+    });
 
+    const createExpenseElement = document.querySelector(".create-expense-button");
+    createExpenseElement.addEventListener("click", event => {
+      const modal = App.getModal("newExpense");
+      modal.open();
+    });
   }
 }
