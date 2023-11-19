@@ -23,7 +23,7 @@ function callGetOperation(url, data, callback) {
            if (xhr.status >= 200 && xhr.status < 300) {
                callback(null, xhr.response);
            } else {
-               const err = xhr.status === 0 ? "Ошибка пустой ответ" : xhr.response;
+               const err = xhr.response || "Ошибка пустой ответ";
                callback(err, null);
            }
        }
@@ -48,7 +48,7 @@ function callNotGetOperation(url, method, data, callback) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(null, xhr.response);
             } else {
-                const err = xhr.status === 0 ? "Ошибка пустой ответ" : xhr.response;
+                const err = xhr.response || "Ошибка пустой ответ";
                 callback(err, null);
             }
         }

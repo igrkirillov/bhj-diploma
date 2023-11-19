@@ -13,6 +13,7 @@ class CreateAccountForm extends AsyncForm {
       if (!err) {
         if (response.success) {
           App.update();
+          this.element.reset();
           const modal = App.getModal("createAccount");
           modal.close();
         } else {
