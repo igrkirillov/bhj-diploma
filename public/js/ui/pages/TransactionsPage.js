@@ -14,6 +14,7 @@ class TransactionsPage {
     this.checkNotNullElement(element);
     this.element = element;
     this.registerEvents();
+    this.lastOptions = null;
   }
 
   checkNotNullElement(element) {
@@ -36,7 +37,11 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    const transactionPage = this;
+    const removeAccountElement = document.querySelector(".remove-account");
+    removeAccountElement.addEventListener("click", event => {
+      transactionPage.removeAccount();
+    });
   }
 
   /**
@@ -49,7 +54,22 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-
+    const answerOfConfirm = confirm("Вы уверены, что хотите удалить счёт?");
+    if (answerOfConfirm) {
+      Account.remove({id: this.lastOptions.account_id}, (err, response) => {
+        if (!err) {
+          if (response.success) {
+            this.clear();
+            App.updateWidgets();
+            App.updateForms();
+          } else {
+            alert("Ошибка! " + response.error);
+          }
+        } else {
+          alert("Ошибка! " + err);
+        }
+      });
+    }
   }
 
   /**
@@ -59,7 +79,20 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-
+    const answerOfConfirm = confirm("Вы уверены, что хотите удалить транзакцию ?");
+    if (answerOfConfirm) {
+      Transaction.remove({id}, (err, response) => {
+        if (!err) {
+          if (response.success) {
+            App.update();
+          } else {
+            alert("Ошибка! " + response.error);
+          }
+        } else {
+          alert("Ошибка! " + err);
+        }
+      });
+    }
   }
 
   /**
@@ -72,6 +105,7 @@ class TransactionsPage {
     this.lastOptions = options;
     if (options) {
       const accountId = options["account_id"];
+      console.log(accountId);
       Account.get(accountId, (err, response) => {
         if (!err) {
           if (response.success) {
@@ -82,10 +116,11 @@ class TransactionsPage {
         } else {
           alert("Ошибка!" + err);
         }
-      })
+      });
       Transaction.list({account_id: accountId}, (err, response) => {
         if (!err) {
           if (response.success) {
+            console.log(response.data);
             this.renderTransactions(response.data);
           } else {
             alert("Ошибка!" + response.error);
@@ -185,6 +220,18 @@ class TransactionsPage {
     Array.from(contentElement.children).forEach(el => el.remove());
     for (const item of data) {
       contentElement.insertAdjacentHTML("beforeend", this.getTransactionHTML(item));
+    }
+    this.registerRemoveTransactionsHandlers();
+  }
+
+  registerRemoveTransactionsHandlers() {
+    const transactionPage = this;
+    const removeTransactionElements = document.querySelectorAll(".transaction__remove");
+    for (const removeTransactionElement of removeTransactionElements) {
+      removeTransactionElement.addEventListener("click", event => {
+        const transactionId = removeTransactionElement.dataset.id;
+        transactionPage.removeTransaction(transactionId);
+      });
     }
   }
 }

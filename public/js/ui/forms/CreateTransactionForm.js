@@ -20,7 +20,7 @@ class CreateTransactionForm extends AsyncForm {
     Account.list({}, (err, response) => {
       if (!err) {
         if (response.success) {
-          this.addAccountsToDropdown(response.data);
+          this.setAccountsToDropdown(response.data);
         } else {
           alert("Ошибка! " + response.error);
         }
@@ -30,11 +30,17 @@ class CreateTransactionForm extends AsyncForm {
     });
   }
 
-  addAccountsToDropdown(accounts) {
+  setAccountsToDropdown(accounts) {
     const selectElement = this.getSelectElement();
+    Array.from(selectElement.children).forEach(el => el.remove());
     for (const account of accounts) {
       selectElement.insertAdjacentHTML("beforeend", this.getOptionHTML(account));
     }
+  }
+
+  setActiveAccount(activeAccountId) {
+    const selectElement = this.getSelectElement();
+    selectElement.value = activeAccountId || null;
   }
 
   getSelectElement() {

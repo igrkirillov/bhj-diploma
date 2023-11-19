@@ -34,16 +34,6 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
-    },
-    {
-      "name": "1",
-      "user_id": "75vwp13oarlp4gxeyw",
-      "id": "75vwp13uuwlp4ln4t2"
-    },
-    {
-      "name": "2",
-      "user_id": "75vwp13oarlp4gxeyw",
-      "id": "75vwp13uvxlp4lny8y"
     }
   ],
   "transactions": [
@@ -181,6 +171,15 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "75vwp14mf6lp5pwnx4",
+      "type": "income",
+      "name": "МКБ",
+      "sum": 500,
+      "account_id": "75vwp14mbqlp5puyed",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "created_at": "2023-11-19T16:54:09.687Z"
     }
   ]
 }

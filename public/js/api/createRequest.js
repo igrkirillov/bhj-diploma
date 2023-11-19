@@ -18,16 +18,21 @@ function callGetOperation(url, data, callback) {
     const xhr = new XMLHttpRequest;
     xhr.open("GET", fullUrl, true);
     xhr.responseType = "json";
-    xhr.addEventListener("readystatechange", () => {
+    xhr.addEventListener("load", () => {
        if (xhr.readyState === xhr.DONE) {
            if (xhr.status >= 200 && xhr.status < 300) {
                callback(null, xhr.response);
            } else {
-               callback(xhr.response, null);
+               const err = xhr.status === 0 ? "Ошибка пустой ответ" : xhr.response;
+               callback(err, null);
            }
        }
     });
-    xhr.send();
+    try {
+        xhr.send();
+    } catch (e) {
+        alert(e);
+    }
 }
 
 function callNotGetOperation(url, method, data, callback) {
@@ -43,9 +48,14 @@ function callNotGetOperation(url, method, data, callback) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 callback(null, xhr.response);
             } else {
-                callback(xhr.response, null);
+                const err = xhr.status === 0 ? "Ошибка пустой ответ" : xhr.response;
+                callback(err, null);
             }
         }
     });
-    xhr.send(formData);
+    try {
+        xhr.send(formData);
+    } catch (e) {
+        alert(e);
+    }
 }

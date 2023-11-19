@@ -66,9 +66,14 @@ class AccountsWidget {
       Account.list({}, (err, response) => {
         if (!err) {
           if (response.success) {
+            console.log(response.data);
+            const activeAccountId = this.getActiveAccountId();
             accountsWidget.clear();
             for (const account of response.data) {
               accountsWidget.renderItem(account);
+            }
+            if (activeAccountId) {
+              this.findAccountElementAndSetAsActive(activeAccountId);
             }
           } else {
             alert("Ошибка! " + response.error);
@@ -108,6 +113,21 @@ class AccountsWidget {
     App.showPage("transactions", {account_id: element.dataset.id});
   }
 
+  getActiveAccountId() {
+    const activeAccountElement = this.getActiveAccountElement();
+    return activeAccountElement && activeAccountElement.dataset.id;
+  }
+
+  getActiveAccountElement() {
+    return document.querySelector(".account.active");
+  }
+
+  findAccountElementAndSetAsActive(accountId) {
+    Array.from(document.querySelectorAll(".account"))
+        .filter(el => el.dataset.id === accountId)
+        .forEach(el => el.classList.add("active"));
+  }
+
   /**
    * Возвращает HTML-код счёта для последующего
    * отображения в боковой колонке.
@@ -135,6 +155,9 @@ class AccountsWidget {
     accountElement.firstElementChild.addEventListener("click", (event) => {
       event.preventDefault();
       accountsWidget.onSelectAccount(accountElement);
+      const accountId = accountElement.dataset.id;
+      App.getForm("createIncome").setActiveAccount(accountId);
+      App.getForm("createExpense").setActiveAccount(accountId);
     });
   }
 }
