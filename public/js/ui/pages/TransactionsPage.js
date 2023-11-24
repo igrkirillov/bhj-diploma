@@ -39,7 +39,7 @@ class TransactionsPage {
   registerEvents() {
     const transactionPage = this;
     const removeAccountElement = document.querySelector(".remove-account");
-    removeAccountElement.addEventListener("click", event => {
+    removeAccountElement.addEventListener("click", () => {
       transactionPage.removeAccount();
     });
   }
@@ -105,7 +105,6 @@ class TransactionsPage {
     this.lastOptions = options;
     if (options) {
       const accountId = options["account_id"];
-      console.log(accountId);
       Account.get(accountId, (err, response) => {
         if (!err) {
           if (response.success) {
@@ -120,7 +119,6 @@ class TransactionsPage {
       Transaction.list({account_id: accountId}, (err, response) => {
         if (!err) {
           if (response.success) {
-            console.log(response.data);
             this.renderTransactions(response.data);
           } else {
             alert("Ошибка!" + response.error);
@@ -228,7 +226,7 @@ class TransactionsPage {
     const transactionPage = this;
     const removeTransactionElements = document.querySelectorAll(".transaction__remove");
     for (const removeTransactionElement of removeTransactionElements) {
-      removeTransactionElement.addEventListener("click", event => {
+      removeTransactionElement.addEventListener("click", () => {
         const transactionId = removeTransactionElement.dataset.id;
         transactionPage.removeTransaction(transactionId);
       });

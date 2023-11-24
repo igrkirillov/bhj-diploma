@@ -35,7 +35,7 @@ class AccountsWidget {
    * */
   registerEvents() {
     const createAccountElement = document.querySelector(".create-account");
-    createAccountElement.addEventListener("click", (event) => {
+    createAccountElement.addEventListener("click", () => {
       const modal = App.getModal("createAccount");
       modal.open();
     });
@@ -66,7 +66,6 @@ class AccountsWidget {
       Account.list({}, (err, response) => {
         if (!err) {
           if (response.success) {
-            console.log(response.data);
             const activeAccountId = this.getActiveAccountId();
             accountsWidget.clear();
             for (const account of response.data) {
@@ -105,11 +104,8 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount(element) {
-    const activeAccountElement = document.querySelector(".account.active");
-    if (activeAccountElement) {
-      activeAccountElement.classList.remove("active");
-    }
-    element.classList.add("active");
+    const accountId = element.dataset.id;
+    this.findAccountElementAndSetAsActive(accountId);
     App.showPage("transactions", {account_id: element.dataset.id});
   }
 
@@ -123,9 +119,19 @@ class AccountsWidget {
   }
 
   findAccountElementAndSetAsActive(accountId) {
-    Array.from(document.querySelectorAll(".account"))
-        .filter(el => el.dataset.id === accountId)
-        .forEach(el => el.classList.add("active"));
+    const currentActiveElement = document.querySelector(".account.active");
+    if (currentActiveElement) {
+      currentActiveElement.classList.remove("active");
+    }
+
+    const newActiveElement = Array.from(document.querySelectorAll(".account"))
+        .filter(el => el.dataset.id === accountId)[0];
+    if (newActiveElement) {
+      newActiveElement.classList.add("active");
+    }
+
+    App.getForm("createIncome").setActiveAccount(accountId);
+    App.getForm("createExpense").setActiveAccount(accountId);
   }
 
   /**
@@ -155,9 +161,6 @@ class AccountsWidget {
     accountElement.firstElementChild.addEventListener("click", (event) => {
       event.preventDefault();
       accountsWidget.onSelectAccount(accountElement);
-      const accountId = accountElement.dataset.id;
-      App.getForm("createIncome").setActiveAccount(accountId);
-      App.getForm("createExpense").setActiveAccount(accountId);
     });
   }
 }
