@@ -18,7 +18,7 @@ function callGetOperation(url, data, callback) {
         }
         queryParameters += key + "=" + data[key];
     }
-    let fullUrl = queryParameters.length !== 0 ? url + "?" + queryParameters : url;
+    let fullUrl = queryParameters.length !== 0 ? (url + "?" + queryParameters) : url;
     console.log(fullUrl);
     const xhr = new XMLHttpRequest;
     xhr.open("GET", fullUrl, true);
@@ -46,6 +46,8 @@ function callNotGetOperation(url, method, data, callback) {
     for (const key of Object.keys(data)) {
         formData.append(key, data[key]);
     }
+    console.log(url);
+    console.log(formData);
     xhr.open( method, url);
     xhr.responseType = "json";
     xhr.addEventListener("readystatechange", () => {
