@@ -21,7 +21,7 @@ function callGetOperation(url, data, callback) {
     let fullUrl = queryParameters.length !== 0 ? (url + "?" + queryParameters) : url;
     console.log(fullUrl);
     const xhr = new XMLHttpRequest;
-    xhr.open("GET", fullUrl, true);
+    xhr.open("GET", fullUrl);
     xhr.responseType = "json";
     xhr.addEventListener("load", () => {
        if (xhr.readyState === xhr.DONE) {
@@ -48,7 +48,7 @@ function callNotGetOperation(url, method, data, callback) {
     }
     console.log(url);
     console.log(formData);
-    xhr.open( method, url);
+    xhr.open(method, url);
     xhr.responseType = "json";
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === xhr.DONE) {
