@@ -17,6 +17,12 @@
       "email": "2@mail.ru",
       "password": "2",
       "id": "75vwp13oarlp4gxeyw"
+    },
+    {
+      "name": "Игорь",
+      "email": "igr.kirillov@gmailcom",
+      "password": "1",
+      "id": "75vwp14nmnlp5qrqrz"
     }
   ],
   "accounts": [
@@ -34,6 +40,26 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "name": "с1",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "id": "75vwp14mnwlp5qds1d"
+    },
+    {
+      "name": "с1",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "id": "75vwp14ntvlp5qrwdo"
+    },
+    {
+      "name": "с2",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "id": "75vwp14nuflp5qrzts"
+    },
+    {
+      "name": "21123123",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "id": "75vwp1ia66lpc7w2rq"
     }
   ],
   "transactions": [
@@ -180,6 +206,78 @@
       "account_id": "75vwp14mbqlp5puyed",
       "user_id": "75vwp13oarlp4gxeyw",
       "created_at": "2023-11-19T16:54:09.687Z"
+    },
+    {
+      "id": "75vwp14nlmlp5qngjf",
+      "type": "income",
+      "name": "МКБ",
+      "sum": 5000,
+      "account_id": "75vwp14mnwlp5qds1d",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "created_at": "2023-11-19T17:14:59.834Z"
+    },
+    {
+      "id": "75vwp14nuvlp5qslj1",
+      "type": "income",
+      "name": "д",
+      "sum": 1000,
+      "account_id": "75vwp14ntvlp5qrwdo",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "created_at": "2023-11-19T17:18:59.580Z"
+    },
+    {
+      "id": "75vwp14nw0lp5qsvcd",
+      "type": "income",
+      "name": "с2",
+      "sum": 200,
+      "account_id": "75vwp14ntvlp5qrwdo",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "created_at": "2023-11-19T17:19:12.300Z"
+    },
+    {
+      "id": "75vwp14nwplp5qt991",
+      "type": "income",
+      "name": "с3",
+      "sum": 4000,
+      "account_id": "75vwp14ntvlp5qrwdo",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "created_at": "2023-11-19T17:19:30.324Z"
+    },
+    {
+      "id": "75vwp14nz6lp5qts36",
+      "type": "income",
+      "name": "с5",
+      "sum": 666,
+      "account_id": "75vwp14ntvlp5qrwdo",
+      "user_id": "75vwp14nmnlp5qrqrz",
+      "created_at": "2023-11-19T17:19:54.737Z"
+    },
+    {
+      "id": "75vwp14p06lp5r83jd",
+      "type": "income",
+      "name": "7",
+      "sum": 500,
+      "account_id": "75vwp14mnwlp5qds1d",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "created_at": "2023-11-19T17:31:02.760Z"
+    },
+    {
+      "id": "75vwp14p1ilp5rljqr",
+      "type": "expense",
+      "name": "developer",
+      "sum": 100,
+      "account_id": "75vwp14mnwlp5qds1d",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "created_at": "2023-11-19T17:41:30.290Z"
+    },
+    {
+      "id": "75vwp1i9u3lpc7tx12",
+      "type": "income",
+      "name": "My company",
+      "sum": 500,
+      "account_id": "75vwp14mnwlp5qds1d",
+      "user_id": "75vwp13oarlp4gxeyw",
+      "created_at": "2023-11-24T06:02:31.669Z"
     }
   ]
 }

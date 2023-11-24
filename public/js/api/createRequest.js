@@ -11,10 +11,15 @@ const createRequest = (url, data, method, callback) => {
 };
 
 function callGetOperation(url, data, callback) {
-    let fullUrl = url + "?";
+    let queryParameters = "";
     for (const key of Object.keys(data)) {
-        fullUrl = fullUrl + key + "=" + data[key];
+        if (queryParameters.length !== 0) {
+            queryParameters += "&";
+        }
+        queryParameters += key + "=" + data[key];
     }
+    let fullUrl = queryParameters.length !== 0 ? url + "?" + queryParameters : url;
+    console.log(fullUrl);
     const xhr = new XMLHttpRequest;
     xhr.open("GET", fullUrl, true);
     xhr.responseType = "json";
